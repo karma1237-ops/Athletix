@@ -1,0 +1,38 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --orange: #ff6600;
+  --orange-light: #ff8533;
+  --bg: #111111;
+  --bg2: #1a1a1a;
+  --text: #f0f0f0;
+  --text-muted: #888888;
+  --border: rgba(255, 255, 255, 0.08);
+  --font-title: 'Bebas Neue', 'Arial Black', sans-serif;
+  --font-body:  'DM Sans', 'Helvetica Neue', sans-serif;
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+a { color: inherit; text-decoration: none; }
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
