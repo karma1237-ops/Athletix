@@ -1,0 +1,54 @@
+image: node:20-alpine
+
+stages:
+  - test
+  - build
+
+# ── Cache npm pour accélérer les pipelines ────────────────────────────────────
+cache:
+  key:
+    files:
+      - backend/package-lock.json
+      - frontend/package-lock.json
+  paths:
+    - backend/node_modules/
+    - frontend/node_modules/
+
+# ── Tests unitaires backend ───────────────────────────────────────────────────
+backend:test:
+  stage: test
+  script:
+    - cd backend
+    - npm ci --prefer-offline
+    - npm test -- --ci --coverage --coverageReporters=text --coverageReporters=cobertura
+  coverage: '/Lines\s*:\s*(\d+\.?\d*)%/'
+  artifacts:
+    when: always
+    reports:
+      junit: backend/junit.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: backend/coverage/cobertura-coverage.xml
+    paths:
+      - backend/coverage/
+    expire_in: 7 days
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_COMMIT_BRANCH == "develop"'
+
+# ── Build frontend (vérifie qu'il compile sans erreur) ────────────────────────
+frontend:build:
+  stage: build
+  script:
+    - cd frontend
+    - npm ci --prefer-offline
+    - npm run build
+  artifacts:
+    paths:
+      - frontend/dist/
+    expire_in: 1 day
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_COMMIT_BRANCH == "develop"'
