@@ -1,23 +1,36 @@
 const jwtService = require("../services/jwtService");
 
 // ── Vérifier l'Access Token JWT ───────────────────────────────────────────────
+<<<<<<< HEAD
 const verifyToken = async (req, res, next) => {
+=======
+const verifyToken = (req, res, next) => {
+>>>>>>> e1feae0dd91be950fd1e619e155ba18d2ab31576
   const authHeader = req.headers["authorization"];
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res.status(401).json({ message: "Token d'accès manquant." });
   }
+<<<<<<< HEAD
 
   const token = authHeader.split(" ")[1];
   let decoded;
 
   try {
     decoded = jwtService.verifyAccessToken(token);
+=======
+  const token = authHeader.split(" ")[1];
+  try {
+    const decoded = jwtService.verifyAccessToken(token);
+    req.user = decoded;
+    next();
+>>>>>>> e1feae0dd91be950fd1e619e155ba18d2ab31576
   } catch (err) {
     if (err.name === "TokenExpiredError") {
       return res.status(401).json({ message: "Token expiré.", code: "TOKEN_EXPIRED" });
     }
     return res.status(403).json({ message: "Token invalide." });
   }
+<<<<<<< HEAD
 
   // ── Vérification que l'utilisateur existe toujours en BDD ────────────────
   // Cas concret : compte supprimé par un admin → son access token (15min)
@@ -50,16 +63,25 @@ const verifyToken = async (req, res, next) => {
 
   req.user = decoded;
   next();
+=======
+>>>>>>> e1feae0dd91be950fd1e619e155ba18d2ab31576
 };
 
 // ── Vérifier le rôle admin ────────────────────────────────────────────────────
 const isAdmin = (req, res, next) => {
   if (!req.user) return res.status(401).json({ message: "Non authentifié." });
+<<<<<<< HEAD
   if (req.user.role !== "admin") {
     return res.status(403).json({ message: "Accès réservé aux administrateurs." });
   }
+=======
+  if (req.user.role !== "admin") return res.status(403).json({ message: "Accès réservé aux administrateurs." });
+>>>>>>> e1feae0dd91be950fd1e619e155ba18d2ab31576
   next();
 };
 
 module.exports = { verifyToken, isAdmin };
+<<<<<<< HEAD
 
+=======
+>>>>>>> e1feae0dd91be950fd1e619e155ba18d2ab31576

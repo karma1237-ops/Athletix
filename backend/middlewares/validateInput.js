@@ -18,7 +18,11 @@ const RULES = {
     nom:      { type: "string", min: 2, max: 50,  required: true },
     prenom:   { type: "string", min: 2, max: 50,  required: true },
     email:    { type: "email",  max: 255,          required: true },
+<<<<<<< HEAD
     password: { type: "string", min: 12, max: 128, required: true },
+=======
+    password: { type: "string", min: 8, max: 128, required: true },
+>>>>>>> e1feae0dd91be950fd1e619e155ba18d2ab31576
   },
   login: {
     email:    { type: "email",  max: 255, required: true },
@@ -28,7 +32,11 @@ const RULES = {
   // Panier
   cartAdd: {
     id_produit: { type: "integer", min: 1, required: true },
+<<<<<<< HEAD
     quantite:   { type: "integer", min: -99, max: 99 },
+=======
+    quantite:   { type: "integer", min: 1, max: 99 },
+>>>>>>> e1feae0dd91be950fd1e619e155ba18d2ab31576
   },
 
   // Checkout

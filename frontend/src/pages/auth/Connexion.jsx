@@ -4,7 +4,11 @@ import { useAuth } from "../../context/AuthContext";
 import { sanitize } from "../../hooks/useSanitize";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+<<<<<<< HEAD
 const MAX_ATTEMPTS = 3; // doit correspondre au backend
+=======
+const MAX_ATTEMPTS = 5; // doit correspondre au backend
+>>>>>>> e1feae0dd91be950fd1e619e155ba18d2ab31576
 
 const VALIDATORS = {
   email:    (v) => !v.trim() ? "L'adresse email est requise."    : !EMAIL_RE.test(v) ? "Format d'email invalide." : "",

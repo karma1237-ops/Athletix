@@ -32,6 +32,7 @@ class AuthService {
 
   // ══ CONNEXION ══════════════════════════════════════════════════════════════
   async login({ email, password, clientIp }) {
+<<<<<<< HEAD
     const ip = clientIp || "unknown";
 
     // ── ÉTAPE 1 : Vérifier l'email ─────────────────────────────────────────
@@ -50,6 +51,17 @@ class AuthService {
       const result = await recordFailedAttempt(ip, null);
       const err    = new Error("Identifiants invalides.");
       err.status   = 401;
+=======
+    const ip   = clientIp || "unknown";
+    const user = await UserRepository.findByEmail(email);
+
+    // Email introuvable
+    if (!user) {
+      const result = await recordFailedAttempt(ip, null);
+      const err    = new Error("Identifiants invalides.");
+      err.status   = 401;
+      // Si le verrou vient de se déclencher sur cette tentative, on le signale
+>>>>>>> e1feae0dd91be950fd1e619e155ba18d2ab31576
       if (result.lockedUntil) {
         err.status      = 429;
         err.message     = `Trop de tentatives échouées. Réessayez dans ${result.waitSeconds} seconde(s).`;
@@ -61,10 +73,15 @@ class AuthService {
       throw err;
     }
 
+<<<<<<< HEAD
     // ── ÉTAPE 2 : Vérifier le mot de passe ────────────────────────────────
     // On n'arrive ici que si l'email existe.
     const valid = await argon2.verify(user.mot_de_passe, password);
 
+=======
+    // Mot de passe incorrect
+    const valid = await argon2.verify(user.mot_de_passe, password);
+>>>>>>> e1feae0dd91be950fd1e619e155ba18d2ab31576
     if (!valid) {
       const result = await recordFailedAttempt(ip, user.id_utilisateur);
       const err    = new Error("Identifiants invalides.");
@@ -80,7 +97,11 @@ class AuthService {
       throw err;
     }
 
+<<<<<<< HEAD
     // ── ÉTAPE 3 : Succès ──────────────────────────────────────────────────
+=======
+    // ── Succès ────────────────────────────────────────────────────────────────
+>>>>>>> e1feae0dd91be950fd1e619e155ba18d2ab31576
     await resetAttempts(ip);
 
     const tokens = await jwtService.generateTokenPair(user);

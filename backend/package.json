@@ -8,6 +8,7 @@
     "dev": "nodemon server.js",
     "test": "jest --forceExit"
   },
+<<<<<<< HEAD
   "jest": {
     "testEnvironment": "node",
     "testMatch": ["**/tests/**/*.test.js"],
@@ -21,6 +22,8 @@
       "services/**/*.js"
     ]
   },
+=======
+>>>>>>> e1feae0dd91be950fd1e619e155ba18d2ab31576
   "dependencies": {
     "argon2": "^0.44.0",
     "cookie-parser": "^1.4.6",
@@ -38,7 +41,10 @@
   },
   "devDependencies": {
     "jest": "^29.7.0",
+<<<<<<< HEAD
     "jest-junit": "^16.0.0",
+=======
+>>>>>>> e1feae0dd91be950fd1e619e155ba18d2ab31576
     "nodemon": "^3.1.4",
     "supertest": "^7.0.0"
   }

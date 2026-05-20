@@ -84,6 +84,7 @@ class AdminController {
       // Empêcher l'admin de se supprimer lui-même
       if (parseInt(id) === req.user.id)
         return res.status(400).json({ message: "Impossible de supprimer votre propre compte." });
+<<<<<<< HEAD
 
       const user = await Utilisateur.findByPk(id);
       if (!user) return res.status(404).json({ message: "Utilisateur introuvable." });
@@ -107,6 +108,12 @@ class AdminController {
       await user.destroy();
 
       res.json({ message: "Utilisateur supprimé et sessions révoquées." });
+=======
+      const user = await Utilisateur.findByPk(id);
+      if (!user) return res.status(404).json({ message: "Utilisateur introuvable." });
+      await user.destroy();
+      res.json({ message: "Utilisateur supprimé." });
+>>>>>>> e1feae0dd91be950fd1e619e155ba18d2ab31576
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
@@ -253,4 +260,8 @@ class AdminController {
   }
 }
 
+<<<<<<< HEAD
 module.exports = new AdminController();
+=======
+module.exports = new AdminController();
+>>>>>>> e1feae0dd91be950fd1e619e155ba18d2ab31576

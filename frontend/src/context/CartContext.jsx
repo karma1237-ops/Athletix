@@ -23,12 +23,17 @@ export function CartProvider({ children }) {
   }, [isAuthenticated, accessToken]);
 
   const addItem = useCallback(async (produit, quantite = 1) => {
+<<<<<<< HEAD
     try {
       const updated = await cartService.addItem(accessToken, produit, quantite);
       setItems(updated.produits);
     } catch (err) {
       console.error("[CartContext] addItem error:", err);
     }
+=======
+    const updated = await cartService.addItem(accessToken, produit, quantite);
+    setItems(updated.produits);
+>>>>>>> e1feae0dd91be950fd1e619e155ba18d2ab31576
   }, [accessToken]);
 
   const removeItem = useCallback(async (id_produit) => {

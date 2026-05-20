@@ -6,8 +6,13 @@ export default function Panier() {
   const navigate = useNavigate();
 
   // Gestion de la quantité (le bouton - fonctionne maintenant)
+<<<<<<< HEAD
   const changeQuantity = async (id_produit, delta) => {
     await addItem({ id_produit }, delta);
+=======
+  const changeQuantity = (id_produit, delta) => {
+    addItem({ id_produit }, delta);
+>>>>>>> e1feae0dd91be950fd1e619e155ba18d2ab31576
   };
 
   if (items.length === 0) {
@@ -47,6 +52,10 @@ export default function Panier() {
                   <button 
                     style={s.qtyBtn} 
                     onClick={() => changeQuantity(item.id_produit, -1)}
+<<<<<<< HEAD
+=======
+                    disabled={item.quantite <= 1}
+>>>>>>> e1feae0dd91be950fd1e619e155ba18d2ab31576
                   >
                     −
                   </button>
